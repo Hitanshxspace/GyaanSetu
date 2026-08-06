@@ -1679,7 +1679,7 @@ const T = {
     loading_questions:"प्रश्न लोड होत आहेत...",no_questions:"अजून कोणतेही प्रश्न नाहीत.",
     urban_answered:"शहर · उत्तर दिले",rural_answered:"गाव · उत्तर दिले",
     in_lang:"भाषेत",logout:"बाहेर पडा",play_answer:"उत्तर ऐका",
-    think:"विचार करत आहे...",error_tutor:"आत्ता शिक्षकांशी संपर्क होऊ शकला नाही.",
+    think:"विचार करत आहे...",error_tutor:"आत्ता शिक्षकांशी संपर्क ���ोऊ शकला नाही.",
     translate_failed:"भाषांतर अयशस्वी — पुन्हा प्रयत्न करा",enter_name:"कृपया तुमचे नाव प्रविष्ट करा.",
     quiz_title:"तुमचे ज्ञान तपासा",quiz_desc:"बरोबर उत्तरावर ब्राउनी पॉइंट मिळतील.",
   },
@@ -1813,7 +1813,7 @@ const LIBRARY = [
   {cat:'Vocational',lang:'English',title:'Composting for Better Soil',text:'Kitchen waste like vegetable peels, tea leaves and dry leaves can be layered in a pit or bin to make compost. Turn the pile every week to let air in, and keep it slightly moist. In six to eight weeks it turns into dark, crumbly compost that makes farm and garden soil richer.'},
   {cat:'Vocational',lang:'Hindi',title:'खाद बनाएँ, मिट्टी को उपजाऊ बनाएँ',text:'सब्ज़ियों के छिलके, चाय की पत्ती और सूखी पत्तियाँ एक गड्ढे या बिन में परतों में रखें। हर हफ़्ते पलटें ताकि हवा मिले। छह से आठ हफ़्तों में खाद बन जाती है जो खेत की मिट्टी को समृद्ध करती है।'},
   {cat:'Vocational',lang:'Tamil',title:'சிறு கடைக்கு எளிய கணக்கு வைப்பு',text:'ஒவ்வொரு நாளும் வாங்கியது, விற்றது என இரண்டு பத்திகளில் எழுதி வையுங்கள். வாரம் ஒருமுறை மொத்த வருமானத்தையும் செலவையும் கூட்டி பாருங்கள்.'},
-  {cat:'Vocational',lang:'Marathi',title:'बँक खाते कसे उघडावे',text:'बँकेत जाऊन खाते उघडण्याचा फॉर्म घ्या आणि तो भरा. आधार कार्ड, पॅन कार्ड आणि एक पासपोर्ट फोटो सोबत ठेवा. काही दिवसांत तुमचे खाते सुरू होईल.'},
+  {cat:'Vocational',lang:'Marathi',title:'बँक खाते कसे उघडावे',text:'बँकेत जाऊन खाते उघडण्याचा फॉर्म घ्या आणि तो भरा. आधार कार्ड, पॅन कार्ड आणि एक पासपोर्ट फोटो सोबत ठेवा. काही दिवस��ंत तुमचे खाते सुरू होईल.'},
   {cat:'Govt Schemes',lang:'English',title:'Applying for a Student Scholarship',text:'Check your eligibility on the scheme notice at your school first. Collect your marksheets, income certificate and bank passbook copy. Fill the application form carefully and have a teacher check it before you submit — small mistakes are the most common reason applications get delayed.'},
   {cat:'Govt Schemes',lang:'Hindi',title:'छात्रवृत्ति के लिए आवेदन',text:'पहले अपने स्कूल के नोटिस से पात्रता जाँचें। मार्कशीट, आय प्रमाण पत्र और बैंक पासबुक की कॉपी तैयार रखें। फॉर्म ध्यान से भरें और किसी शिक्षक से जाँच कराएँ।'},
   {cat:'Govt Schemes',lang:'Bengali',title:'ছাত্রবৃত্তির জন্য আবেদন',text:'প্রথমে স্কুলের নোটিশ থেকে আপনার যোগ্যতা পরীক্ষা করুন। মার্কশিট, আয়ের সনদ এবং ব্যাংক পাসবুকের কপি সংগ্রহ করুন। আবেদনপত্র সাবধানে পূরণ করুন।'},
@@ -2038,75 +2038,37 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
   });
 });
 
-/* =================================================================AI API — Groq (free, no credit card, 14,400 req/day)
-   Uses Groq's free API with Llama 3.3 70B.
-   Get your free key at console.groq.com
+/* =================================================================
+   AI API — Uses Vercel backend (Anthropic Claude)
+   API keys stored in Vercel environment variables
 ================================================================= */
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
-
-function getGroqKey(){
-  return localStorage.getItem('groq_api_key') || '';
-}
-
-function promptForKey(){
-  const existing = getGroqKey();
-  const key = window.prompt(
-    'Enter your Groq API key to use AI features.\n\n' +
-    'Get one FREE (no credit card) at:\nconsole.groq.com\n\n' +
-    'Your key starts with gsk_...',
-    existing
-  );
-  if(key && key.trim().length > 10){
-    localStorage.setItem('groq_api_key', key.trim());
-    return key.trim();
-  } else if(key){
-    showToast('Key too short — paste the full key from console.groq.com');
-    return null;
-  }
-  return null;
-}
 
 async function askClaude(systemPrompt, userText){
-  let key = getGroqKey();
-  if(!key){
-    key = promptForKey();
-    if(!key) throw new Error('No API key provided.');
-  }
-
-  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const response = await fetch('/api/claude', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + key
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      model: GROQ_MODEL,
-      max_tokens: 1000,
-      temperature: 0.7,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userText }
-      ]
+      system: systemPrompt,
+      userText: userText
     })
   });
 
   if(!response.ok){
     const err = await response.text();
-    if(response.status === 401){
-      localStorage.removeItem('groq_api_key');
-    }
-    throw new Error('Groq API error ' + response.status + ': ' + err);
+    throw new Error('API error ' + response.status + ': ' + err);
   }
 
   const data = await response.json();
-  if(data.error) throw new Error(data.error.message || 'Groq API error');
+  if(data.error) throw new Error(data.error.message || 'API error');
 
-  const text = (data.choices || [])
-    .map(c => (c.message && c.message.content) || '')
-    .join('\n')
-    .trim();
+  // Handle Anthropic API response format
+  const text = (data.content && data.content[0] && data.content[0].text) 
+    ? data.content[0].text.trim()
+    : '';
 
-  if(!text) throw new Error('Empty response from Groq');
+  if(!text) throw new Error('Empty response from API');
   return text;
 }
 
@@ -2376,7 +2338,7 @@ function seedIfEmpty(list){
     {id:'seed5',askerRole:'urban',askerLang:'English',question:'How do rural communities manage water during summer droughts? Any traditional methods?',answer:'We use check dams built from local stone that slow rainwater and recharge our wells. We also have "kunds" — circular underground cisterns plastered with lime that stay cool and prevent evaporation for months.',answerLang:'English',answererRole:'rural',translated:null,timestamp:now-86400000*2},
     {id:'seed6',askerRole:'rural',askerLang:'Bengali',question:'শহরে বাড়ি ভাড়া নিতে গেলে কী কী সাবধানতা নেওয়া উচিত?',answer:null,answerLang:null,answererRole:null,translated:null,timestamp:now-86400000*1},
     {id:'seed7',askerRole:'urban',askerLang:'English',question:'What are the signs that a crop is getting too much or too little water?',answer:'Too much water: leaves turn yellow and roots rot — pull one plant and smell it. Too little: leaves curl inward in the afternoon even if the morning was fine. The right amount: soil at finger depth should feel like a wrung-out cloth.',answerLang:'English',answererRole:'rural',translated:null,timestamp:now-3600000*5},
-    {id:'seed8',askerRole:'rural',askerLang:'Tamil',question:'சிட்டி மருத்துவமனையில் இலவச சிகிச்சை எப்படி பெறலாம்?',answer:null,answerLang:null,answererRole:null,translated:null,timestamp:now-3600000*3},
+    {id:'seed8',askerRole:'rural',askerLang:'Tamil',question:'சிட்டி ம���ுத்துவமனையில் இலவச சிகிச்சை எப்படி பெறலாம்?',answer:null,answerLang:null,answererRole:null,translated:null,timestamp:now-3600000*3},
     {id:'seed9',askerRole:'urban',askerLang:'English',question:'How do villages handle disputes without police or courts?',answer:'The Gram Sabha meets under a peepal tree. Elders from both sides speak. We prefer restoration over punishment — the guilty party plants trees, helps with harvest, or pays in grain. Rarely does a matter go to the block office.',answerLang:'English',answererRole:'rural',translated:null,timestamp:now-3600000*2},
     {id:'seed10',askerRole:'rural',askerLang:'Hindi',question:'मोबाइल से पैसे भेजने का सबसे सुरक्षित तरीका क्या है? UPI safe है क्या?',answer:'UPI बिल्कुल safe है अगर आप अपना PIN किसी को न बताएं। BHIM, PhonePe या Google Pay — तीनों RBI-regulated हैं। किसी अनजान के QR code को scan मत करें।',answerLang:'Hindi',answererRole:'urban',translated:null,timestamp:now-1800000},
   ];
@@ -2509,7 +2471,7 @@ async function renderQuestions(isNew = false, newId = null){
         playBtn.style.display = 'none';
         try {
           const translated = await askClaude(
-            'Translate the following text from ' + q.askerLang + ' into ' + lang + '. Output ONLY the translated text. Keep the tone natural and conversational.',
+            'Translate ONLY the text into ' + lang + '. Do not add any new information, explanation, or context. Output ONLY the translated text, nothing else.',
             q.question
           );
           q.questionTranslations[lang] = translated;
@@ -2627,7 +2589,7 @@ function renderAnswerArea(q, container){
 
         try {
           const translated = await askClaude(
-            `Translate the following text from ${q.answerLang} into ${lang}. Output ONLY the translated text. Keep the tone natural and conversational.`,
+            `Translate ONLY the text into ${lang}. Do not add any new information, explanation, or context. Output ONLY the translated text, nothing else.`,
             q.answer
           );
           q.translations[lang] = translated;
