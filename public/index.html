@@ -446,11 +446,230 @@
   .thinking-dots span:nth-child(3){animation-delay:.4s;}
   @keyframes dot-bounce{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-6px);}}
 
-  @media(max-width:480px){
-    .header-controls{gap:5px;}
-    nav.tabs button{padding:9px 10px;font-size:12px;}
-    .login-wrap{padding:28px 20px;}
+  /* ═══════════════════════════════════════════════════════════
+     MOBILE RESPONSIVENESS - Tablet & Small Screens (max 768px)
+     ═══════════════════════════════════════════════════════════ */
+  @media(max-width:768px){
+    /* Header and navigation */
+    .top-row{padding:0 16px;gap:8px;}
+    .brand-text h1{font-size:16px;}
+    .header-controls{flex-wrap:wrap;gap:4px;justify-content:flex-end;}
+    .user-pill,.lang-switcher,.btn-logout{font-size:11px;padding:4px 8px;}
+    nav.tabs{padding:0 16px;gap:1px;overflow-x:auto;}
+    nav.tabs button{padding:8px 12px;font-size:12px;}
+    
+    /* Main content */
+    main{padding:24px 16px 80px;}
+    .hero h2{font-size:22px;}
+    .hero p{font-size:14px;}
+    
+    /* Cards */
+    .card,.tutor-card-header{padding:16px;}
     .tutor-body{padding:16px;}
+    
+    /* Forms and inputs */
+    .q-input-wrap textarea{padding:12px 14px;font-size:14px;min-height:80px;}
+    .frow{gap:8px;}
+    .frow > div{min-width:120px;}
+    
+    /* Buttons */
+    button.btn{padding:9px 14px;font-size:12px;}
+    .btn-login{padding:12px;font-size:15px;}
+    
+    /* Library grid */
+    .lib-grid{gap:12px;}
+    .lib-item{padding:14px;border-radius:12px;}
+    
+    /* Spacing */
+    .hero{margin-bottom:20px;}
+    .qcard{padding:16px;margin-bottom:12px;}
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     MOBILE - Small Phones (max 480px)
+     ═══════════════════════════════════════════════════════════ */
+  @media(max-width:480px){
+    :root{--header-h:56px;}
+    
+    /* Fonts scale down */
+    body{font-size:14px;}
+    h1,h2,h3{font-size:18px;}
+    
+    /* Header & navigation */
+    .top-row{height:var(--header-h);padding:0 12px;gap:6px;}
+    .brand{gap:8px;}
+    .brand-mark{width:32px;height:32px;}
+    .brand-text h1{font-size:14px;}
+    .header-controls{gap:4px;padding:0;}
+    .user-pill{display:none;}
+    .lang-switcher{padding:3px 8px;min-width:45px;}
+    .lang-switcher select{font-size:11px;min-width:40px;}
+    .btn-logout{padding:4px 8px;font-size:11px;}
+    
+    /* Navigation tabs - scrollable on mobile */
+    nav.tabs{
+      padding:0 12px;
+      gap:1px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scroll-behavior:smooth;
+    }
+    nav.tabs button{
+      padding:8px 10px;
+      font-size:11px;
+      flex-shrink:0;
+    }
+    
+    /* Main content area */
+    main{padding:16px 12px 80px;}
+    
+    /* Hero section */
+    .hero{margin-bottom:16px;}
+    .hero h2{font-size:20px;line-height:1.3;}
+    .hero p{font-size:13px;line-height:1.5;margin-top:6px;}
+    .eyebrow{font-size:9px;margin-bottom:6px;}
+    
+    /* Login screen */
+    .login-wrap{
+      padding:24px 16px 20px;
+      max-width:100%;
+      border-radius:20px;
+    }
+    .login-logo-mark{width:56px;height:56px;}
+    .login-logo-name{font-size:24px;}
+    .login-logo{gap:10px;}
+    .login-welcome{font-size:14px;margin-bottom:20px;}
+    .login-field input,.login-field select{padding:10px 12px;font-size:14px;}
+    .login-roles{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+    .role-card{padding:12px 10px;border-radius:10px;}
+    .role-card .role-icon{width:36px;height:36px;margin:0 auto 6px;}
+    .btn-login{padding:11px;font-size:14px;margin-top:6px;}
+    
+    /* Tutor card */
+    .tutor-card-header{
+      padding:14px 16px;
+      gap:12px;
+    }
+    .tutor-avatar{width:40px;height:40px;border-radius:10px;}
+    .tutor-card-header h3{font-size:16px;}
+    .tutor-card-header p{font-size:11px;}
+    .tutor-body{padding:14px;}
+    
+    /* Language pills */
+    .lang-pill-row{gap:6px;margin-bottom:14px;}
+    .lang-pill{padding:5px 12px;font-size:11px;}
+    
+    /* Question input */
+    .q-input-wrap textarea{
+      padding:11px 12px;
+      font-size:14px;
+      min-height:72px;
+      line-height:1.5;
+    }
+    
+    /* Answer display */
+    .answer-wrap{border-radius:10px;margin-top:14px;}
+    .answer-label{padding:6px 12px;font-size:8px;}
+    .answer-text{padding:12px;font-size:14px;line-height:1.6;}
+    .answer-box{padding:12px;font-size:14px;border-radius:10px;margin-top:12px;}
+    
+    /* Forms */
+    .frow{gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+    .frow > div{flex:1;min-width:100px;}
+    select,textarea,input[type=text]{
+      padding:10px 11px;
+      font-size:14px;
+      border-radius:8px;
+    }
+    
+    /* Buttons */
+    button.btn{
+      padding:9px 12px;
+      font-size:12px;
+      border-radius:8px;
+      gap:5px;
+    }
+    .btn-primary{box-shadow:0 2px 6px rgba(200,112,14,.2);}
+    .btn-ghost{border-width:1px;}
+    
+    /* Cards and lists */
+    .card{padding:16px;border-radius:12px;}
+    .qcard{
+      padding:12px;
+      margin-bottom:10px;
+      border-radius:10px;
+    }
+    .qcard .qtext{font-size:14px;margin:8px 0 2px;}
+    .qmeta{font-size:9px;}
+    .tag{font-size:8px;padding:2px 7px;}
+    
+    /* Translation pairs */
+    .translate-pair{gap:10px;margin-top:8px;}
+    .translate-pair .col{
+      padding:10px;
+      font-size:13px;
+      line-height:1.5;
+      border-radius:8px;
+    }
+    .translate-pair .col .lbl{font-size:8px;margin-bottom:4px;}
+    
+    /* Library items */
+    .lib-grid{grid-template-columns:1fr;gap:12px;}
+    .lib-item{padding:12px;border-radius:12px;}
+    .lib-item h3{font-size:14px;margin-bottom:6px;}
+    .lib-item p{font-size:12px;margin:0 0 10px;}
+    .lib-filters{gap:6px;margin-bottom:14px;}
+    .lib-filters button{padding:5px 12px;font-size:11px;}
+    
+    /* Quiz mode */
+    .quiz-mode-grid{gap:12px;margin-bottom:18px;}
+    .mode-card{padding:16px;border-radius:14px;}
+    .mode-badge{font-size:10px;}
+    
+    /* Helper text */
+    .helper{font-size:10px;margin-top:4px;}
+    
+    /* Offline pill */
+    .offline-pill{
+      font-size:10px;
+      padding:4px 10px;
+      margin-bottom:12px;
+      border-radius:999px;
+    }
+    
+    /* Toast */
+    #toast{
+      left:50%;
+      bottom:16px;
+      transform:translateX(-50%) translateY(150%);
+      font-size:12px;
+      padding:10px 14px;
+      border-radius:8px;
+    }
+    #toast.show{transform:translateX(-50%) translateY(0);}
+    
+    /* Checkbox/radio adjustments */
+    input[type=checkbox],input[type=radio]{width:18px;height:18px;cursor:pointer;}
+    
+    /* Scrollable areas */
+    nav.tabs{
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     EXTRA SMALL - Very Small Phones (max 360px)
+     ═══════════════════════════════════════════════════════════ */
+  @media(max-width:360px){
+    main{padding:12px 10px 60px;}
+    .hero h2{font-size:18px;}
+    .hero p{font-size:12px;}
+    nav.tabs button{padding:6px 8px;font-size:10px;}
+    .login-wrap{padding:20px 14px;}
+    .tutor-body{padding:12px;}
+    .q-input-wrap textarea{font-size:13px;min-height:64px;}
+    button.btn{font-size:11px;padding:8px 10px;}
   }
 
   /* ─── PROFESSIONAL UPGRADES ─── */
@@ -1819,7 +2038,7 @@ const LIBRARY = [
   {cat:'Life Skills',lang:'Bengali',title:'হাত ধোয়া ও স্বাস্থ্যবিধি',text:'খাওয়ার আগে এবং টয়লেট ব্যবহারের পরে কমপক্ষে ২০ সেকেন্ড সাবান দিয়ে হাত ধুন। শুধু হাতের তালু নয়, নখের নিচে এবং আঙুলের ফাঁকেও পরিষ্কার করুন।'},
   {cat:'Vocational',lang:'English',title:'Composting for Better Soil',text:'Kitchen waste like vegetable peels, tea leaves and dry leaves can be layered in a pit or bin to make compost. Turn the pile every week to let air in, and keep it slightly moist. In six to eight weeks it turns into dark, crumbly compost that makes farm and garden soil richer.'},
   {cat:'Vocational',lang:'Hindi',title:'खाद बनाएँ, मिट्टी को उपजाऊ बनाएँ',text:'सब्ज़ियों के छिलके, चाय की पत्ती और सूखी पत्तियाँ एक गड्ढे या बिन में परतों में रखें। हर हफ़्ते पलटें ताकि हवा मिले। छह से आठ हफ़्तों में खाद बन जाती है जो खेत की मिट्टी को समृद्ध करती है।'},
-  {cat:'Vocational',lang:'Tamil',title:'சிறு கடைக்கு எளிய கணக்கு வைப்பு',text:'ஒவ்வொரு நாளும் வாங்கியது, விற்றது என இரண்டு பத்திகளில் எழுதி வையுங்கள். வாரம் ஒருமுறை மொத்த வருமானத்தையும் செலவையும் கூட்டி பாருங்கள்.'},
+  {cat:'Vocational',lang:'Tamil',title:'சிறு கடைக்கு எளிய கணக்கு வைப்பு',text:'ஒவ்வொரு நாளும் வாங்கியது, விற்றது என இரண்டு ��த்திகளில் எழுதி வையுங்கள். வாரம் ஒருமுறை மொத்த வருமானத்தையும் செலவையும் கூட்டி பாருங்கள்.'},
   {cat:'Vocational',lang:'Marathi',title:'बँक खाते कसे उघडावे',text:'बँकेत जाऊन खाते उघडण्याचा फॉर्म घ्या आणि तो भरा. आधार कार्ड, पॅन कार्ड आणि एक पासपोर्ट फोटो सोबत ठेवा. काही ��िवस��ंत तुमचे खाते सुरू होईल.'},
   {cat:'Govt Schemes',lang:'English',title:'Applying for a Student Scholarship',text:'Check your eligibility on the scheme notice at your school first. Collect your marksheets, income certificate and bank passbook copy. Fill the application form carefully and have a teacher check it before you submit — small mistakes are the most common reason applications get delayed.'},
   {cat:'Govt Schemes',lang:'Hindi',title:'छात्रवृत्ति के लिए आवेदन',text:'पहले अपने स्कूल के नोटिस से पात्रता जाँचें। मार्कशीट, आय प्रमाण पत्र और बैंक पासबुक की कॉपी तैयार रखें। फॉर्म ध्यान से भरें और किसी शिक्षक से जाँच कराएँ।'},
