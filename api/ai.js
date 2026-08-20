@@ -7,16 +7,11 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const apiKey = process.env.GROQ_API_KEY || process.env.AI_GATEWAY_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'AI service credentials are missing on the server.' });
+  const apiKey = process.env.AI_GATEWAY_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'Vercel AI is not configured for this deployment.' });
 
-  const isGateway = Boolean(process.env.AI_GATEWAY_API_KEY && !process.env.GROQ_API_KEY);
-  const endpoint = isGateway
-    ? 'https://ai-gateway.vercel.sh/v1/chat/completions'
-    : 'https://api.groq.com/openai/v1/chat/completions';
-  const model = isGateway
-    ? (process.env.AI_GATEWAY_MODEL || 'google/gemini-2.5-flash')
-    : (process.env.GROQ_MODEL || 'llama-3.3-70b-versatile');
+  const endpoint = 'https://ai-gateway.vercel.sh/v1/chat/completions';
+  const model = process.env.AI_GATEWAY_MODEL || 'google/gemini-2.5-flash';
 
   const { system, userText } = req.body || {};
   if (typeof userText !== 'string' || !userText.trim()) {
