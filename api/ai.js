@@ -1,17 +1,22 @@
-// api/ai.js — server-side AI proxy
+// Server-side AI proxy. The API key is never exposed to the browser.
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const apiKey = process.env.AI_GATEWAY_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'The AI service is not configured on the server.' });
+  const apiKey = process.env.GROQ_API_KEY || process.env.AI_GATEWAY_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'AI service credentials are missing on the server.' });
 
-  const endpoint = 'https://ai-gateway.vercel.sh/v1/chat/completions';
-  const model = process.env.AI_GATEWAY_MODEL || 'google/gemini-2.5-flash';
+  const isGateway = Boolean(process.env.AI_GATEWAY_API_KEY && !process.env.GROQ_API_KEY);
+  const endpoint = isGateway
+    ? 'https://ai-gateway.vercel.sh/v1/chat/completions'
+    : 'https://api.groq.com/openai/v1/chat/completions';
+  const model = isGateway
+    ? (process.env.AI_GATEWAY_MODEL || 'google/gemini-2.5-flash')
+    : (process.env.GROQ_MODEL || 'llama-3.3-70b-versatile');
 
   const { system, userText } = req.body || {};
   if (typeof userText !== 'string' || !userText.trim()) {
@@ -27,18 +32,25 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model,
-        max_tokens: 1000,
+        max_tokens: 1400,
         temperature: 0.7,
         messages: [
-          ...(typeof system === 'string' && system.trim() ? [{ role: 'system', content: system }] : []),
+          ...(typeof system === 'string' && system.trim() ? [{ role: 'system', content: system.trim() }] : []),
           { role: 'user', content: userText.trim() },
         ],
       }),
     });
 
-    const data = await response.json();
-    return res.status(response.ok ? 200 : response.status).json(data);
+    const raw = await response.text();
+    let data;
+    try { data = JSON.parse(raw); } catch { data = { error: raw || 'Invalid AI response.' }; }
+    if (!response.ok) {
+      const detail = data?.error?.message || data?.error || `AI request failed (${response.status}).`;
+      return res.status(response.status).json({ error: String(detail) });
+    }
+    return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({ error: 'AI Gateway request failed.' });
+    console.error('[v0] AI proxy error:', error);
+    return res.status(502).json({ error: 'Could not connect to the AI service.' });
   }
 }

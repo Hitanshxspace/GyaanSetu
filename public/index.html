@@ -1914,7 +1914,7 @@ const T = {
     tab_tutor:"AI ஆசிரியர்",tab_connect:"சேது இணைப்பு",tab_library:"நூலகம்",tab_quiz:"வினாடி வினா",
     tutor_eyebrow:"குரல்-முதல் · பிராந்திய மொழி",
     tutor_title:"கேள்வி கேளுங்கள், உங்கள் மொழியில் விளக்கம் பெறுங்கள்",
-    tutor_desc:"கேள்வியை தட்டச்சு செய்யுங்கள் அல்லது பேசுங்கள் — ஆசிரியர் பதில் தருவார்.",
+    tutor_desc:"கேள்வியை தட்��ச்சு செய்யுங்கள் அல்லது பேசுங்கள் — ஆசிரியர் பதில் தருவார்.",
     answer_in:"பதில் மொழி",your_question:"உங்கள் கேள்வி",
     tutor_placeholder:"உதா. பனி ஏன் தண்ணீரில் மிதக்கிறது?",
     speak_question:"��ேள்வியை பேசுங்கள்",ask_tutor:"ஆசிரியரிடம் கேளுங்கள்",
@@ -2257,7 +2257,7 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
 });
 
 /* =================================================================
-   AI API — Vercel AI Gateway
+   AI API — secure server proxy
    The browser calls our serverless proxy; credentials never reach the client.
 ================================================================= */
 async function askClaude(systemPrompt, userText){
@@ -2267,14 +2267,19 @@ async function askClaude(systemPrompt, userText){
     body: JSON.stringify({system: systemPrompt, userText})
   });
 
-  const data = await response.json();
+  const raw = await response.text();
+  let data;
+  try { data = JSON.parse(raw); } catch { data = {error: raw}; }
   if(!response.ok || data.error) throw new Error(data.error || 'The AI service request failed.');
 
   const text = (data.choices || [])
-    .map(c => (c.message && c.message.content) || '')
+    .map(c => {
+      const content = c.message && c.message.content;
+      return Array.isArray(content) ? content.map(part => part.text || '').join('') : (content || '');
+    })
     .join('\n')
     .trim();
-  if(!text) throw new Error('Empty response from AI Gateway.');
+  if(!text) throw new Error('The AI service returned an empty response.');
   return text;
 }
 
@@ -3321,7 +3326,7 @@ function openTranslatePro(){
 }
 
 /* =================================================================
-   GROQ-POWERED SVG FLOWCHART GENERATOR
+   AI-POWERED SVG FLOWCHART GENERATOR
 ================================================================= */
 async function generateFlowchart(btn, concept, explanation, formula){
   const resultArea = btn.closest('.sci-card-back-body').querySelector('[class^="flowchart-result-"]');
