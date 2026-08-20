@@ -1,4 +1,4 @@
-// api/ai.js — server-side Vercel AI Gateway proxy
+// api/ai.js — server-side AI proxy
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -8,7 +8,10 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const apiKey = process.env.AI_GATEWAY_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'AI Gateway is not configured.' });
+  if (!apiKey) return res.status(500).json({ error: 'The AI service is not configured on the server.' });
+
+  const endpoint = 'https://ai-gateway.vercel.sh/v1/chat/completions';
+  const model = process.env.AI_GATEWAY_MODEL || 'google/gemini-2.5-flash';
 
   const { system, userText } = req.body || {};
   if (typeof userText !== 'string' || !userText.trim()) {
@@ -16,14 +19,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://ai-gateway.vercel.sh/v1/chat/completions', {
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model,
         max_tokens: 1000,
         temperature: 0.7,
         messages: [
