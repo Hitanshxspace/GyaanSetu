@@ -1,36 +1,41 @@
-// api/ai.js — Vercel serverless proxy for OpenRouter
-// Add OPENROUTER_API_KEY in Vercel → Settings → Environment Variables
+// api/ai.js — server-side Vercel AI Gateway proxy
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'OPENROUTER_API_KEY not set.' });
-  const { system, userText } = req.body;
-  if (!userText) return res.status(400).json({ error: 'Missing userText.' });
+
+  const apiKey = process.env.AI_GATEWAY_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'AI Gateway is not configured.' });
+
+  const { system, userText } = req.body || {};
+  if (typeof userText !== 'string' || !userText.trim()) {
+    return res.status(400).json({ error: 'Missing userText.' });
+  }
+
   try {
-    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://ai-gateway.vercel.sh/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + apiKey,
-        'HTTP-Referer': 'https://gyansetu.vercel.app',
-        'X-Title': 'GyanSetu'
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-8b-instruct:free',
+        model: 'google/gemini-2.5-flash',
         max_tokens: 1000,
+        temperature: 0.7,
         messages: [
-          ...(system ? [{ role: 'system', content: system }] : []),
-          { role: 'user', content: userText }
-        ]
+          ...(typeof system === 'string' && system.trim() ? [{ role: 'system', content: system }] : []),
+          { role: 'user', content: userText.trim() },
+        ],
       }),
     });
-    const data = await r.json();
-    return res.status(r.ok ? 200 : r.status).json(data);
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
+
+    const data = await response.json();
+    return res.status(response.ok ? 200 : response.status).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: 'AI Gateway request failed.' });
   }
 }

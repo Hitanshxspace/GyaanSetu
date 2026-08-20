@@ -1462,10 +1462,7 @@
           <div class="user-role" id="headerRole"></div>
         </div>
       </div>
-      <button class="btn-logout" onclick="changeApiKey()" title="Set OpenRouter API key" style="border-color:rgba(200,112,14,.4);color:rgba(232,136,15,.85);">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-        API Key
-      </button>
+
       <button class="btn-logout" onclick="doLogout()">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         <span data-i18n="logout">Log out</span>
@@ -1795,7 +1792,7 @@
 
 </main>
 
-<footer>Gyaan Setu · ज्ञान सेतु — AI Tutor & Setu Connect powered by Groq API · Demo prototype</footer>
+<footer>Gyaan Setu · ज्ञान सेतु — AI Tutor & Setu Connect powered by Vercel AI Gateway · Demo prototype</footer>
 </div><!-- /appShell -->
 
 <div class="toast" id="toast"></div>
@@ -1845,7 +1842,7 @@ const T = {
     loginWelcome:"स्वागत है! आज आप किस रूप में जुड़ रहे हैं?",
     role_rural:"गाँव / ग्रामीण",role_rural_sub:"किसान, छात्र, परिवार",
     role_urban:"शहर / नगरीय",role_urban_sub:"कामगार, शिक्षक, विशेषज्ञ",
-    your_name:"आपका नाम",enter_setu:"ज्ञान सेतु में प्रवेश करें",
+    your_name:"आपका नाम",enter_setu:"ज्��ान सेतु में प्रवेश करें",
     tab_tutor:"AI शिक्षक",tab_connect:"सेतु कनेक्ट",tab_library:"पुस्तकालय",tab_quiz:"क्विज़",
     tutor_eyebrow:"आवाज़-पहले · क्षेत्रीय भाषा",
     tutor_title:"अपना सवाल पूछें, अपनी भाषा में समझाया पाएँ",
@@ -1961,7 +1958,7 @@ const T = {
     connect_desc:"শহরের ব্যবহারকারী কৃষি সম্পর্কে জিজ্ঞেস করে — গ্রামের কণ্ঠস্বর নিজের ভাষায় উত্তর দেয়।",
     i_am_asking_as:"আমি জিজ্ঞেস করছি",rural_user:"গ্রাম / গ্রামীণ",urban_user:"শহর / নগর",
     my_language:"আমার ভাষা",question_for_other:"অপর পক্ষের জন্য আপনার প্রশ্ন",
-    connect_placeholder:"যেমন — কৃষকরা কীভাবে গম বোনার সময় ঠিক করেন?",
+    connect_placeholder:"যেমন — কৃষকরা কীভাবে গম বোন��র সময় ঠিক করেন?",
     post_question:"প্রশ্ন পোস্ট করুন",
     library_eyebrow:"আগে থেকে লোড · সংযোগ লাগে না",
     library_title:"জ্ঞান পাঠাগার",library_desc:"জিকে, জীবন দক্ষতা এবং ব্যবহারিক জ্ঞান।",
@@ -1975,7 +1972,7 @@ const T = {
     in_lang:"ভাষায়",logout:"বের হন",play_answer:"উত্তর শুনুন",
     think:"ভাবছি...",error_tutor:"এখন শিক্ষকের সাথে যোগাযোগ হলো না।",
     translate_failed:"অনুবাদ ব্যর্থ — আবার চেষ্টা করুন",enter_name:"অনুগ্রহ করে আপনার নাম লিখুন.",
-    quiz_title:"আপনার জ্ঞান পরীক্ষা করুন",quiz_desc:"সঠিক উত্তরে Brownie Points পাবেন।",
+    quiz_title:"আপনার জ্ঞান পরীক্ষা করুন",quiz_desc:"সঠিক উত্তর��� Brownie Points পাবেন।",
   }
 };
 
@@ -2034,8 +2031,8 @@ const LIBRARY = [
   {cat:'GK',lang:'Bengali',title:'আমাদের সৌরজগৎ',text:'সূর্য আমাদের সৌরজগতের কেন্দ্রে রয়েছে এবং আটটি গ্রহ এর চারদিকে ঘোরে। বুধ, শুক্র, পৃথিবী এবং মঙ্গল পাথুরে এবং সূর্যের কাছাকাছি। বৃহস্পতি, শনি, ইউরেনাস এবং নেপচুন অনেক বড় এবং মূলত গ্যাস দিয়ে তৈরি।'},
   {cat:'Life Skills',lang:'English',title:'Handwashing and Hygiene',text:'Wash your hands with soap for at least 20 seconds, especially before eating and after using the toilet. Clean under your nails and between your fingers, not just your palms. Good handwashing is one of the simplest ways to stop the spread of illness in a home or a classroom.'},
   {cat:'Life Skills',lang:'Hindi',title:'हाथ धोना और साफ़-सफ़ाई',text:'खाने से पहले और शौचालय के बाद कम से कम 20 सेकंड तक साबुन से हाथ धोएँ। केवल हथेलियाँ नहीं, नाखूनों के नीचे और उँगलियों के बीच भी साफ़ करें। अच्छे से हाथ धोना घर और स्कूल में बीमारियाँ फैलने से रोकने का सबसे आसान तरीका है।'},
-  {cat:'Life Skills',lang:'Tamil',title:'கை கழுவுதல் மற்றும் சுகாதாரம்',text:'சாப்பிடுவதற்கு முன்பும் கழிப்பறை பயன்படுத்திய பின்பும் குறைந்தது 20 வினாடிகள் சோப்பால் கை கழுவுங்கள். உள்ளங்கை மட்டுமல்ல, நகங்களுக்கு கீழும் விரல்களுக்கு இடையேயும் சுத்தம் செய்யுங்கள்.'},
-  {cat:'Life Skills',lang:'Bengali',title:'হাত ধোয়া ও স্বাস্থ্যবিধি',text:'খাওয়ার আগে এবং টয়লেট ব্যবহারের পরে কমপক্ষে ২০ সেকেন্ড সাবান দিয়ে হাত ধুন। শুধু হাতের তালু নয়, নখের নিচে এবং আঙুলের ফাঁকেও পরিষ্কার করুন।'},
+  {cat:'Life Skills',lang:'Tamil',title:'கை கழுவ���தல் மற்றும் சுகாதாரம்',text:'சாப்பிடுவதற்கு முன்பும் கழிப்பறை பயன்படுத்திய பின்பும் குறைந்தது 20 வினாடிகள் சோப்பால் கை கழுவுங்கள். உள்ளங்கை மட்டுமல்ல, நகங்களுக்கு கீழும் விரல்களுக்கு இடையேயும் சுத்தம் செய்யுங்கள்.'},
+  {cat:'Life Skills',lang:'Bengali',title:'হাত ধোয়া ও স্বাস্থ্যবিধি',text:'খাওয়ার আগে এবং টয়লেট ব্যবহারের পরে কমপক্ষে ২০ সেকেন্ড সাবান দিয়ে হাত ধুন। শুধ�� হাতের তালু নয়, নখের নিচে এবং আঙুলের ফাঁকেও পরিষ্কার করুন।'},
   {cat:'Vocational',lang:'English',title:'Composting for Better Soil',text:'Kitchen waste like vegetable peels, tea leaves and dry leaves can be layered in a pit or bin to make compost. Turn the pile every week to let air in, and keep it slightly moist. In six to eight weeks it turns into dark, crumbly compost that makes farm and garden soil richer.'},
   {cat:'Vocational',lang:'Hindi',title:'खाद बनाएँ, मिट्टी को उपजाऊ बनाएँ',text:'सब्ज़ियों के छिलके, चाय की पत्ती और सूखी पत्तियाँ एक गड्ढे या बिन में परतों में रखें। हर हफ़्ते पलटें ताकि हवा मिले। छह से आठ हफ़्तों में खाद बन जाती है जो खेत की मिट्टी को समृद्ध करती है।'},
   {cat:'Vocational',lang:'Tamil',title:'சிறு கடைக்கு எளிய கணக்கு வைப்பு',text:'ஒவ்வொரு நாளும் வாங்கியது, விற்றது என இரண்டு ��த்திகளில் எழுதி வையுங்கள். வாரம் ஒருமுறை மொத்த வருமானத்தையும் செலவையும் கூட்டி பாருங்கள்.'},
@@ -2234,11 +2231,6 @@ function doLogin(){
   renderPremiumGrid();
 }
 
-function changeApiKey(){
-  const key = promptForKey();
-  if(key) showToast('API key saved. AI features are ready.');
-}
-
 function doLogout(){
   currentUser = null;
   browniePoints = 0;
@@ -2265,57 +2257,24 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
 });
 
 /* =================================================================
-   AI API — Groq (free, no credit card, 14,400 req/day)
-   Uses Groq's free API with Llama 3.3 70B.
-   Get your free key at console.groq.com or set GROQ_API_KEY env var
+   AI API — Vercel AI Gateway
+   The browser calls our serverless proxy; credentials never reach the client.
 ================================================================= */
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
-
-function getGroqKey(){
-  // First check environment variable (loaded via window object in HTML)
-  if(window.GROQ_API_KEY) return window.GROQ_API_KEY;
-  // Then check localStorage
-  return localStorage.getItem('groq_api_key') || '';
-}
-
 async function askClaude(systemPrompt, userText){
-  const key = getGroqKey();
-  if(!key) throw new Error('Groq API key not configured. Please set GROQ_API_KEY environment variable or add it in settings.');
-
-  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+  const response = await fetch('/api/ai', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + key
-    },
-    body: JSON.stringify({
-      model: GROQ_MODEL,
-      max_tokens: 1000,
-      temperature: 0.7,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userText }
-      ]
-    })
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({system: systemPrompt, userText})
   });
 
-  if(!response.ok){
-    const err = await response.text();
-    if(response.status === 401){
-      localStorage.removeItem('groq_api_key');
-    }
-    throw new Error('Groq API error ' + response.status + ': ' + err);
-  }
-
   const data = await response.json();
-  if(data.error) throw new Error(data.error.message || 'Groq API error');
+  if(!response.ok || data.error) throw new Error(data.error || 'AI Gateway request failed.');
 
   const text = (data.choices || [])
     .map(c => (c.message && c.message.content) || '')
     .join('\n')
     .trim();
-
-  if(!text) throw new Error('Empty response from Groq');
+  if(!text) throw new Error('Empty response from AI Gateway.');
   return text;
 }
 
@@ -2408,9 +2367,9 @@ document.getElementById('tutorAskBtn').addEventListener('click', async () => {
     wrap.innerHTML = `<div class="answer-box" style="background:var(--sindoor-pale);border-color:#DDA090;color:var(--sindoor);">
       ⚠️ Could not reach the tutor.<br>
       <small style="font-size:11px;opacity:0.8;font-family:monospace;word-break:break-all;">${err.message}</small><br><br>
-      <button onclick="localStorage.removeItem('groq_api_key'); location.reload();" style="font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid currentColor;background:transparent;color:var(--sindoor);cursor:pointer;">
-        🔑 Reset API Key &amp; Retry
-      </button>
+<button onclick="location.reload();" style="font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid currentColor;background:transparent;color:var(--sindoor);cursor:pointer;">
+  Retry AI request
+  </button>
     </div>`;
   }
 
@@ -2460,11 +2419,28 @@ function unlockWithBP(){
   showToast('Hard Mode unlocked! 5 BP spent.');
 }
 
+function showPaymentQR(id, price, name){
+  const siteUrl = window.location.origin + window.location.pathname;
+  const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=' + encodeURIComponent(siteUrl + '?payment=' + id + '-' + Date.now());
+  const existing = document.getElementById('paymentQrDialog');
+  if(existing) existing.remove();
+  const dialog = document.createElement('div');
+  dialog.id = 'paymentQrDialog';
+  dialog.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(12,18,32,.72);display:flex;align-items:center;justify-content:center;padding:20px;';
+  dialog.innerHTML = '<div style="width:min(360px,100%);background:#fff;border-radius:18px;padding:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.28);font-family:inherit;">' +
+    '<div style="font-size:24px;margin-bottom:6px;">Payment QR</div>' +
+    '<p style="margin:0 0 14px;color:#526070;font-size:14px;line-height:1.5;">Scan to visit GyaanSetu. Payments are not accepted yet, so this QR will not unlock the feature.</p>' +
+    '<img src="' + qrUrl + '" alt="QR code linking to the GyaanSetu website" width="240" height="240" style="display:block;margin:0 auto 16px;border-radius:8px;" />' +
+    '<div style="font-weight:700;margin-bottom:4px;">' + name + ' · ₹' + price + '</div>' +
+    '<div style="font-size:12px;color:#b45309;margin-bottom:18px;">Coming soon — no payment processed</div>' +
+    '<button type="button" onclick="document.getElementById(\'paymentQrDialog\').remove()" style="border:0;border-radius:9px;padding:10px 22px;background:#1e4fa3;color:#fff;font-weight:700;cursor:pointer;">Close</button>' +
+    '</div>';
+  dialog.addEventListener('click', function(event){ if(event.target === dialog) dialog.remove(); });
+  document.body.appendChild(dialog);
+}
+
 function unlockWithPay(){
-  hardUnlocked = true;
-  updateHardLockUI();
-  setTimeout(() => startQuiz('hard'), 350);
-  showToast('Payment of ₹50 received. Hard Mode unlocked!');
+  showPaymentQR('hard-mode', 50, 'Hard Mode');
 }
 
 /* =================================================================
@@ -3154,15 +3130,9 @@ function unlockPremium(id, cost){
 }
 
 function unlockPremiumPaid(id, price){
-  // Simulate payment flow (replace with real payment gateway integration)
   const feat = PREMIUM_FEATURES.find(f => f.id === id);
   const name = feat ? feat.title : id;
-  if(confirm('Pay ₹' + price + ' to unlock "' + name + '" for lifetime access?\n\n(This is a demo — clicking OK simulates a successful payment.)')) {
-    unlockedFeatures.add(id);
-    openPremiumTools.add(id);
-    showToast('✅ Payment of ₹' + price + ' received! ' + name + ' is now unlocked.');
-    renderPremiumGrid();
-  }
+  showPaymentQR(id, price, name);
 }
 
 // ── Premium tool openers ──
@@ -3482,20 +3452,7 @@ function showToast(msg){
   setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-/* =================================================================
-   INITIALIZE GROQ API KEY FROM ENVIRONMENT
-================================================================= */
-(function(){
-  // Try to load API key from public environment variables
-  // The backend will inject this if GROQ_API_KEY env var is set
-  fetch('/api/config').then(r => r.json()).then(config => {
-    if(config.groqApiKey){
-      window.GROQ_API_KEY = config.groqApiKey;
-    }
-  }).catch(() => {
-    // Silently fail - user can add key to localStorage if needed
-  });
-})();
+
 </script>
 </body>
 </html>
