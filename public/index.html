@@ -1920,7 +1920,7 @@ const T = {
     speak_question:"��ேள்வியை பேசுங்கள்",ask_tutor:"ஆசிரியரிடம் கேளுங்கள்",
     voice_helper:"குரல் உள்ளீட்டிற்கு Chrome அல்லது Edge தேவை.",
     connect_eyebrow:"இருவழி பரிமாற்றம்",
-    connect_title:"நகரமும் கிராமமும் ஒன்றையொன்று கேட்கும் இடம்",
+    connect_title:"நகரமும் கிராமமும் ஒன்றையொன���று கேட்கும் இடம்",
     connect_desc:"நகர பயனர் விவசாயம் பற்றி கேட்கிறார் — கிராம குரல் தன் மொழியில் பதில் சொல்கிறது.",
     i_am_asking_as:"நான் கேட்கிறேன்",rural_user:"கிராமம் / கிராமப்புறம்",urban_user:"நகரம் / நகர்ப்புறம்",
     my_language:"என் மொழி",question_for_other:"மறுபக்கத்திற்கான உங்கள் கேள்வி",
@@ -1962,7 +1962,7 @@ const T = {
     post_question:"প্রশ্ন পোস্ট করুন",
     library_eyebrow:"আগে থেকে লোড · সংযোগ লাগে না",
     library_title:"জ্ঞান পাঠাগার",library_desc:"জিকে, জীবন দক্ষতা এবং ব্যবহারিক জ্ঞান।",
-    works_offline:"সম্পূর্ণ অফলাইনে কাজ করে",show_in:"কোন ভাষায় দেখাবে",
+    works_offline:"সম্পূর্ণ অফলাইনে ক��জ করে",show_in:"কোন ভাষায় দেখাবে",
     listen:"শুনুন",translate_for_asker:"জিজ্ঞেসকারীর জন্য অনুবাদ করুন",
     play_translation:"অনুবাদ শুনুন",translating:"অনুবাদ হচ্ছে...",
     answer_this:"এই প্রশ্নের উত্তর দিন",answering_as:"আমি উত্তর দিচ্ছি",
@@ -2268,7 +2268,7 @@ async function askClaude(systemPrompt, userText){
   });
 
   const data = await response.json();
-  if(!response.ok || data.error) throw new Error(data.error || 'AI Gateway request failed.');
+  if(!response.ok || data.error) throw new Error(data.error || 'The AI service request failed.');
 
   const text = (data.choices || [])
     .map(c => (c.message && c.message.content) || '')
